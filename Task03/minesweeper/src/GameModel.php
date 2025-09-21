@@ -1,4 +1,5 @@
 <?php
+
 namespace belokosoff\minesweeper;
 
 class GameModel
@@ -18,7 +19,7 @@ class GameModel
         $this->playerName = $playerName;
         $this->remainingMines = $mines;
         $this->gameStarted = false;
-        
+
         $this->initializeFields();
     }
 
@@ -32,34 +33,40 @@ class GameModel
     private function placeMines(int $firstRow, int $firstCol): void
     {
         $minesPlaced = 0;
-        
+
         while ($minesPlaced < $this->mines) {
             $row = random_int(0, $this->size - 1);
             $col = random_int(0, $this->size - 1);
-            
+
             // Don't place mine on first click or where mines already exist
             if (($row === $firstRow && $col === $firstCol) || $this->mineField[$row][$col] === -1) {
                 continue;
             }
-            
+
             $this->mineField[$row][$col] = -1;
             $minesPlaced++;
-            
+
             // Update adjacent cells
             for ($dr = -1; $dr <= 1; $dr++) {
                 for ($dc = -1; $dc <= 1; $dc++) {
-                    if ($dr === 0 && $dc === 0) continue;
-                    
+                    if ($dr === 0 && $dc === 0) {
+                        continue;
+                    }
+
                     $nr = $row + $dr;
                     $nc = $col + $dc;
-                    
-                    if ($nr >= 0 && $nr < $this->size && $nc >= 0 && $nc < $this->size && $this->mineField[$nr][$nc] !== -1) {
+
+                    if (
+                        $nr >= 0 && $nr < $this->size &&
+                        $nc >= 0 && $nc < $this->size &&
+                        $this->mineField[$nr][$nc] !== -1
+                    ) {
                         $this->mineField[$nr][$nc]++;
                     }
                 }
             }
         }
-        
+
         $this->gameStarted = true;
     }
 
@@ -114,8 +121,10 @@ class GameModel
         if ($mineCount === 0) {
             for ($dr = -1; $dr <= 1; $dr++) {
                 for ($dc = -1; $dc <= 1; $dc++) {
-                    if ($dr === 0 && $dc === 0) continue;
-                    
+                    if ($dr === 0 && $dc === 0) {
+                        continue;
+                    }
+
                     $this->revealCell($row + $dr, $col + $dc);
                 }
             }
@@ -129,7 +138,7 @@ class GameModel
         }
 
         $cell = $this->visibleField[$row][$col];
-        
+
         if ($cell === ' ') {
             $this->visibleField[$row][$col] = 'F';
             $this->remainingMines--;
@@ -139,7 +148,7 @@ class GameModel
             $this->remainingMines++;
             return true;
         }
-        
+
         return false;
     }
 
@@ -157,7 +166,7 @@ class GameModel
     private function checkWin(): bool
     {
         $unrevealedSafeCells = 0;
-        
+
         for ($row = 0; $row < $this->size; $row++) {
             for ($col = 0; $col < $this->size; $col++) {
                 if ($this->visibleField[$row][$col] === ' ' && $this->mineField[$row][$col] !== -1) {
@@ -165,7 +174,7 @@ class GameModel
                 }
             }
         }
-        
+
         return $unrevealedSafeCells === 0;
     }
 
@@ -177,17 +186,19 @@ class GameModel
     public function getFullField(): array
     {
         $field = [];
-        
+
         for ($row = 0; $row < $this->size; $row++) {
             for ($col = 0; $col < $this->size; $col++) {
                 if ($this->mineField[$row][$col] === -1) {
                     $field[$row][$col] = 'X';
                 } else {
-                    $field[$row][$col] = $this->mineField[$row][$col] === 0 ? '0' : (string)$this->mineField[$row][$col];
+                    $field[$row][$col] = $this->mineField[$row][$col] === 0
+                        ? '0'
+                        : (string) $this->mineField[$row][$col];
                 }
             }
         }
-        
+
         return $field;
     }
 

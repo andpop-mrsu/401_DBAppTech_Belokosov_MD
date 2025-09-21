@@ -1,4 +1,5 @@
 <?php
+
 namespace belokosoff\minesweeper;
 
 class GameController
@@ -15,7 +16,7 @@ class GameController
     public function startNewGame(): void
     {
         $this->view->showWelcomeMessage();
-        
+
         // Get game parameters using cli
         $size = (int) \cli\prompt("Enter field size", 10);
         $mines = (int) \cli\prompt("Enter number of mines", 15);
@@ -72,11 +73,11 @@ class GameController
                 $moveCount++;
 
                 $result = $this->model->openCell($row, $col);
-                
+
                 if ($result['game_over']) {
                     $gameOver = true;
                     $this->view->displayField($this->model->getFullField(), 0);
-                    
+
                     if ($result['win']) {
                         $this->view->showWinMessage($moveCount);
                     } else {

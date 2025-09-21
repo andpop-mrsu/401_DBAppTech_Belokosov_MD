@@ -15,7 +15,7 @@
         "bin/minesweeper"
     ],
     "scripts": {
-        "phpcs": "phpcs --standard=PSR12 src bin",
-        "phpcs-fix": "phpcbf --standard=PSR12 src bin"
+        "phpcs": "./vendor/bin/phpcs --standard=PSR12 src bin",
+        "phpcs-fix": "./vendor/bin/phpcbf --standard=PSR12 src bin"
     }
 }

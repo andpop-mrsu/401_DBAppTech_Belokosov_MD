@@ -1,4 +1,5 @@
 <?php
+
 namespace belokosoff\minesweeper;
 
 use belokosoff\minesweeper\GameController;
@@ -23,12 +24,12 @@ class ConsoleApplication
             case '-n':
                 $this->controller->startNewGame();
                 break;
-            
+
             case '--list':
             case '-l':
                 $this->showGameList();
                 break;
-            
+
             case '--replay':
             case '-r':
                 $id = $args[1] ?? null;
@@ -38,12 +39,12 @@ class ConsoleApplication
                     \cli\err("Error: Game ID is required for replay mode");
                 }
                 break;
-            
+
             case '--help':
             case '-h':
                 $this->showHelp();
                 break;
-            
+
             default:
                 \cli\err("Unknown command: $command");
                 $this->showHelp();

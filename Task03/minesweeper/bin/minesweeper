@@ -1,0 +1,13 @@
+#!/usr/bin/env php
+<?php
+require_once __DIR__ . '/../vendor/autoload.php';
+
+use belokosoff\minesweeper\ConsoleApplication;
+
+try {
+    $app = new ConsoleApplication();
+    $app->run($argv);
+} catch (Exception $e) {
+    \cli\err("Error: " . $e->getMessage());
+    exit(1);
+}

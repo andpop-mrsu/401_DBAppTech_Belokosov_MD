@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сапер</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Сапер</h1>
+        </header>
+        
+        <main>
+            <div id="menu" class="menu">
+                <div class="menu-section">
+                    <h3>Новая игра</h3>
+                    <form id="new-game-form" class="compact-form">
+                        <div class="form-row">
+                            <label for="player-name">Имя:</label>
+                            <input type="text" id="player-name" value="Игрок" required>
+                        </div>
+                        <div class="form-row">
+                            <label for="field-size">Размер:</label>
+                            <input type="number" id="field-size" min="5" max="15" value="8" required>
+                        </div>
+                        <div class="form-row">
+                            <label for="mines-count">Мины:</label>
+                            <input type="number" id="mines-count" min="1" max="30" value="10" required>
+                        </div>
+                        <button type="submit" class="btn-small">Начать</button>
+                    </form>
+                </div>
+                
+                <div class="menu-section">
+                    <h3>Сохраненные игры</h3>
+                    <div class="button-group">
+                        <button id="show-games-btn" class="btn-small">Список партий</button>
+                    </div>
+                    <div id="games-list" class="games-list compact-list"></div>
+                </div>
+                
+                <div class="menu-section">
+                    <h3>Повтор игры</h3>
+                    <div class="form-row">
+                        <label for="game-id">ID игры:</label>
+                        <input type="number" id="game-id" min="1">
+                    </div>
+                    <button id="replay-game-btn" class="btn-small">Повторить</button>
+                </div>
+            </div>
+            
+            <div id="game-container" class="game-container hidden">
+                <div id="replay-notice" class="replay-notice hidden">
+                    📺 Режим просмотра
+                </div>
+                
+                <div class="game-header">
+                    <div class="game-stats">
+                        <span>Игрок: <strong id="current-player"></strong></span>
+                        <span>Поле: <strong id="current-size"></strong></span>
+                        <span>Мины: <strong id="current-mines"></strong></span>
+                        <span>Статус: <strong id="game-status">В процессе</strong></span>
+                    </div>
+                    <button id="back-to-menu" class="btn-small">Меню</button>
+                </div>
+                
+                <div id="game-board" class="game-board"></div>
+                
+                <div id="moves-log" class="moves-log compact-log">
+                    <h4>Ходы:</h4>
+                    <div id="moves-list"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script src="js/database.js"></script>
+    <script src="js/game.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Сапёр — SPA</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>💣 Сапёр</h1>
+
+    <!-- Начало игры -->
+    <div id="setup" class="screen active">
+      <h2>Новая игра</h2>
+      <label>Имя: <input type="text" id="playerName" value="Игрок" /></label><br>
+      <label>Размер (N×N): <input type="number" id="boardSize" min="4" max="16" value="8" /></label><br>
+      <label>Мин: <input type="number" id="mineCount" min="1" value="10" /></label><br>
+      <button id="startBtn">▶ Начать</button>
+      <button id="historyBtn">📜 История игр</button>
+    </div>
+
+    <!-- Игровой процесс -->
+    <div id="game" class="screen">
+      <div class="controls">
+        <span id="status">Готов к ходу…</span>
+        <button id="backBtn">← Назад</button>
+      </div>
+      <div id="board" class="board"></div>
+    </div>
+
+    <!-- История -->
+    <div id="history" class="screen">
+      <h2>История игр</h2>
+      <ul id="gamesList"></ul>
+      <button id="replayBtn" disabled>▶ Повторить</button>
+      <button id="backFromHistory">← Назад</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

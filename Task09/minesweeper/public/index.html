@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minesweeper</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="container">
+    <h1>Minesweeper</h1>
+
+    <div id="menu">
+      <button onclick="app.showNewGameForm()">Новая игра</button>
+      <button onclick="app.loadGamesList()">История</button>
+    </div>
+
+    <!-- Форма -->
+    <div id="new-game-form" class="screen hidden">
+      <h2>Параметры</h2>
+      <div class="form-group">
+        <label>Имя:</label>
+        <input type="text" id="player-name" value="Player">
+      </div>
+      <div class="form-group">
+        <label>Размер:</label>
+        <input type="number" id="board-size" value="10" min="5" max="20">
+      </div>
+      <div class="form-group">
+        <label>Мины:</label>
+        <input type="number" id="mines-count" value="15" min="1">
+      </div>
+      <div style="text-align: center; margin-top: 20px;">
+        <button onclick="app.startGame()">Начать</button>
+        <button class="back-btn" onclick="app.showMenu()">Отмена</button>
+      </div>
+    </div>
+
+    <!-- Игра -->
+    <div id="game-screen" class="screen hidden">
+      <!-- В файле index.html -->
+      <div id="status-bar">
+        <!-- ОБНОВЛЕННЫЙ ID -->
+        <span id="move-counter">Ход: 0</span>
+        <span id="game-status">В процессе</span>
+      </div>
+      <div id="board"></div>
+      <button onclick="app.showMenu()" class="back-btn">Выйти</button>
+    </div>
+
+    <!-- Список -->
+    <div id="games-list-screen" class="screen hidden">
+      <h2>Архив игр</h2>
+      <table border="0">
+        <thead>
+          <tr>
+            <th>Дата</th>
+            <th>Игрок</th>
+            <th>Поле</th>
+            <th>Статус</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="games-table-body"></tbody>
+      </table>
+      <button onclick="app.showMenu()" class="back-btn">Назад</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
